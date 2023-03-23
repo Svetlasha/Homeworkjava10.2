@@ -29,6 +29,14 @@ public class RadioTest {
         int actual = radio.getCurrentStation();
         Assertions.assertEquals(expected, actual);
     }
+    @Test
+    public void testLimitAverage() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(6);
+        int expected = 6;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
 
     @Test
     public void testLimitPositiveBorder() {
@@ -67,13 +75,48 @@ public class RadioTest {
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
-
+    @Test
+    public void testSoundBack() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(2);
+        radio.prev();
+        int expected = 1;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void testSoundBackNull() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(1);
+        radio.prev();
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void testSoundBackMax() {
+        Radio radio = new Radio();
+        radio.setCurrentStation(9);
+        radio.prev();
+        int expected = 8;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
     @Test
     public void testSoundMax() {
         Radio radio = new Radio();
         radio.setCurrentVolume(100);
         radio.next();
         int expected = 100;
+        int actual = radio.getCurrentVolume();
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void testSoundAverage() {
+        Radio radio = new Radio();
+        radio.setCurrentVolume(50);
+        radio.next();
+        int expected = 50;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
